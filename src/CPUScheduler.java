@@ -1,6 +1,22 @@
 import java.util.*;
 
-class Scheduler {
+class Process {
+    public float arrivalTime;
+    public float burstTime;
+    public float startTime;
+    public float completionTime;
+    public float waitingTime;
+    public float turnAroundTime;
+    public int id;
+
+    public Process(float arrivalTime, float burstTime, int id){
+        this.arrivalTime = arrivalTime;
+        this.burstTime = burstTime;
+        this.id = id;
+    }
+}
+
+class CPUScheduler {
     public static void FCFS(Process[] processes) {
         Arrays.sort(processes, Comparator.comparingDouble(p -> p.arrivalTime));
         Queue<Process> queue = new LinkedList<>();
@@ -85,25 +101,7 @@ class Scheduler {
         }
         System.out.println("SJF Algorithm Complete!\n");
     }
-}
 
-class Process {
-    public float arrivalTime;
-    public float burstTime;
-    public float startTime;
-    public float completionTime;
-    public float waitingTime;
-    public float turnAroundTime;
-    public int id;
-
-    public Process(float arrivalTime, float burstTime, int id){
-        this.arrivalTime = arrivalTime;
-        this.burstTime = burstTime;
-        this.id = id;
-    }
-}
-
-public class Driver {
     public static void main(String[] args) {
         Process p1 = new Process(1, 5, 1);
         Process p2 = new Process(4, 3, 2);
@@ -114,10 +112,10 @@ public class Driver {
         Process[] processes = {p1, p2, p3, p4, p5};
 
         System.out.println("Here is an example of the FCFS algorithm:\n");
-        Scheduler.FCFS(processes);
+        CPUScheduler.FCFS(processes);
 
         System.out.println("Here is an example of the SJF algorithm:\n");
-        Scheduler.SJF(processes);
+        CPUScheduler.SJF(processes);
 
 
         System.out.println("Randomly generating processes...\n\n");
@@ -130,10 +128,10 @@ public class Driver {
         Process[] randProcesses = {r1, r2, r3, r4, r5};
 
         System.out.println("Here is an example of the FCFS algorithm:\n");
-        Scheduler.FCFS(randProcesses);
+        CPUScheduler.FCFS(randProcesses);
 
         System.out.println("Here is an example of the SJF algorithm:\n");
-        Scheduler.SJF(randProcesses);
+        CPUScheduler.SJF(randProcesses);
     }
 }
 
